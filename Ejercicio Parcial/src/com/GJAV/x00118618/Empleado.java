@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Empleado {
      protected String nombre;
      protected String puesto;
-    protected double salario;
+     protected double salario;
+
 
     public Empleado(String nombre, String puesto, double salario) {
         this.nombre = nombre;
