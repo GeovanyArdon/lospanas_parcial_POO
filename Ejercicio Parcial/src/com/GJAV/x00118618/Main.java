@@ -1,8 +1,12 @@
 package com.GJAV.x00118618;
 
 
+
+
 import java.util.ArrayList;
+import java.util.function.DoubleToIntFunction;
 import javax.swing.*;
+
 
 public class Main {
 
@@ -33,9 +37,18 @@ public class Main {
                     switch (tipo) {
 
                         case "1":
-                        String nombre = JOptionPane.showInputDialog(null, "Nombre: ");
+                            String nombre = JOptionPane.showInputDialog(null, "Nombre: ");
                         String posicion = JOptionPane.showInputDialog(null, "Posicion: ");
-                        double salario = Integer.parseInt(JOptionPane.showInputDialog(null, "Salario: "));
+                        double salario = 0;
+                        try{
+                            salario = Double.parseDouble(JOptionPane.showInputDialog(null, "Salario: "));
+
+                        }catch (Exception e){
+                            JOptionPane.showMessageDialog(null,"Ingrese un valor numerico no caracteres");
+                            break;
+                        }
+
+
                         if(salario<250){
                             JOptionPane.showMessageDialog(null,"El salario no puede ser menor al minimo(250.00 $)");
                             break;
@@ -65,6 +78,7 @@ public class Main {
                 case 2:
                     JOptionPane.showMessageDialog(null,"Empleados de Servicio Profesional");
                     for (ServicioProfesional p : empleadoTemporal) {
+
                     JOptionPane.showMessageDialog(null, p.toString());
                     }
                     JOptionPane.showMessageDialog(null, "Empleados de Plaza Fija");
