@@ -14,6 +14,17 @@ public class Main {
         ArrayList<ServicioProfesional> empleadoTemporal = new ArrayList<>();
         ArrayList<PlazaFija> empleadoFijo = new ArrayList<>();
 
+
+        String empresa = JOptionPane.showInputDialog(null,"Nombre de la empresa");
+        int contador = 0;
+
+        String empleados;
+        Empresa emp = new Empresa(empresa);
+        PlazaFija pf = null;
+        ServicioProfesional sp = null;
+
+
+
         byte op = 0;
 
         String menu =
@@ -58,6 +69,9 @@ public class Main {
                         String empleado=nombre;
                         //Se crea una lista solo de los empleados Temporales
                         empleadoTemporal.add(new ServicioProfesional(nombre, posicion, salario, meses,dui));
+                            sp=new ServicioProfesional(nombre, posicion, salario, meses, dui);
+                            emp.addEmpleado(sp);
+
 
                         break;
                         case "2":
@@ -67,7 +81,8 @@ public class Main {
                         int extension = Integer.parseInt(JOptionPane.showInputDialog(null, "Extension: "));
                         int dui2=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese DUI: "));
                         empleadoFijo.add(new PlazaFija(nombre2, posicion2, salario2, extension,dui2));
-
+                            pf=new PlazaFija(nombre2, posicion2, salario2, extension, dui2);
+                            emp.addEmpleado(pf);
 
                         break;
                         default: JOptionPane.showMessageDialog(null,"Opcion incorrecta");
@@ -152,38 +167,26 @@ public class Main {
                          break;
 
 
-                    /*
+                    
                 case 4:
-                    int opc3 = Integer.parseInt((JOptionPane.showInputDialog(null, "1.Healthitem" + "\n2.Reusableitem")));
-                    String mesHealthitem = "", mesReusableitem = "";
-                    for(Item p :  PersonalItems){
-                        if(p instanceof Healthitem)
-                            mesHealthitem += p.toString() + "\n";
-                        else if(p instanceof Reusableitem)
-                            mesReusableitem += p.toString() + "\n";
-                    }
-                    switch (opc3) {
-                        case 1:
-                            JOptionPane.showMessageDialog(null, mesHealthitem);
-                            break;
-                        case 2:
-                            JOptionPane.showMessageDialog(null, mesReusableitem);
-                            break;
-                    }
+
+                        String  d = JOptionPane.showInputDialog(null, "Nombre del empleado");
+                           empleados = d;
+                         for (Empleado aux : emp.getPlanilla()){
+                               if (aux.getNombre().equals(d)) {
+
+                                    double pagando = CalculadoraImpuestos.pago(aux);
+                                   JOptionPane.showMessageDialog(null,"Pago con descuentos: $" + CalculadoraImpuestos.pago(aux));
+
+                               }
+                            }
+
 
                     break;
                 case 5:
-                    int ID6 = Integer.parseInt(JOptionPane.showInputDialog(null, "Inserte Id a eliminar: "));
-                    Item p2 = null;
-                    for (Item s : PersonalItems) {
-                        if (s.getID() == ID6) {
-                            p2 = s;
-                        }
-                    }
-                    if (p2 != null) {
-                        PersonalItems.remove(p2);
-                    }
-
+                    JOptionPane.showMessageDialog(null,CalculadoraImpuestos.mostrarTotales());
+                    System.out.println(CalculadoraImpuestos.mostrarTotales());
+                    break;
 
                     break;
 
@@ -210,7 +213,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "La lista ha sido compartida");
 
                     break;
-                    */
+                    
 
             }
         } while (op != 8);

@@ -1,19 +1,50 @@
-package com.GJAV.x00118618;
+package com.FGMS.x00007419;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Empresa extends Empleado { ;
-    private ArrayList<Empresa> empleado;
+public class Empresa {
 
-    public Empresa(String nombre, String puesto, double salario,String empleado) {
-        super(nombre, puesto, salario);
+    private String nombre;
+    List<Empleado> planilla= new ArrayList();;
+
+    public Empresa(String name){
+        this.nombre =nombre;
     }
 
-    public ArrayList<Empresa> getEmpleado() {
-        return empleado;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setEmpleado(ArrayList<Empresa> empleado) {
-        this.empleado = empleado;
+    public List<Empleado> getPlanilla() {
+        return planilla;
+    }
+
+    public void addEmpleado(Empleado empleados ){
+        try{
+            boolean existe = false;
+
+            for(Empleado a : planilla){
+                if(a.getNombre().equals(empleados.getNombre()))
+                    existe = true;
+            }
+
+            if(existe)
+                throw new AlreadyExistException("Ya existe un empleado con ese nombre");
+
+            planilla.add(empleados);
+        }
+        catch(AlreadyExistException ex){
+            System.out.println(ex.getMessage());
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void quitEmpleado(String empleado) {
+        if(planilla.removeIf(s->s.getNombre().equals(empleado))) {
+            System.out.println("Empleado despedido");
+        }
     }
 }
